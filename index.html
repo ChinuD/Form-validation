@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9f51394289.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <form name="submit-to-google-sheet">
+    <div class="container">
+
+        <!-- Upper Div containing heading and description -->
+            <div id="desciption">
+                <h2> Form Validation </h2>
+                <p>
+                    This form takes user inputs and saves the data in excel format <br>
+                    This a project made by Chinmay.
+                </p>
+            </div>
+
+            <!-- Name Div -->
+            <div id="nameDiv" class="input-div">
+                <label for="name">Name <sup>*</sup> <span id="name-Error"></span></label> 
+               <br>
+                <input type="text" id="name" name="Name" class="allInputs" placeholder="Enter Your Name" onkeyup="validateName()">
+            </div>
+
+            <!-- Email Div -->
+            <div id="emailDiv" class="input-div">
+                <label for="email">Email address <sup>*</sup> <span id="email-Error"></span></label> 
+                <br>
+                <input type="email" id="email" name="Email" class="allInputs" placeholder="Enter Your Email Address" onkeyup="validateEmail()">
+            </div>
+
+            <!-- Company Div -->
+            <div id="companyDiv" class="input-div">
+                <label for="company">Company <sup>*</sup> <span id="company-Error"></span></label> 
+               <br>
+                <input type="text" id="company" name="Company" class="allInputs" placeholder="Enter Your Company Name" onkeyup="validateCompany()">
+            </div>
+
+            <!-- Job Title DIv -->
+            <div id="job-titleDiv" class="input-div">
+                <label for="job-title">Job title <sup>*</sup> <span id="title-Error"></span></label>
+                     <br>
+                    <input type="text" id="job-title" name="Job Title" class="allInputs" placeholder="Enter Your Job Title" onkeyup="validateTitle()">
+                    
+            </div>
+            <div id="submit">
+                <button id="submitBtn" onclick=" return checkAll()">Submit</button>
+                <span id="submitError"></span>
+                <button id="clear">Clear Form</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwM0IhqP1M7sAUXD2ja_b6LuB8jBi0zvJBmhw3Ugx6fB_PHSsRG4vuruMsU-Qkygu3kYw/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+<script src="script.js"></script>
+</html>
